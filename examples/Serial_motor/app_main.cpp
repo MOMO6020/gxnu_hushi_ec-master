@@ -76,11 +76,9 @@ void uart_test(void* arg __attribute__((unused)))
     }
 }
 
-void motor_test(void* arg __attribute__((unused)))
-{
-    while (true)
-    {
-        motor->setRef(receive);
+void motor_test(void* arg) {
+    while (true) {
+        motor->setTargetAngle((float)receive);  // 修改后：使用位置环接口 setTargetAngle
         vTaskDelay(5);
     }
 }

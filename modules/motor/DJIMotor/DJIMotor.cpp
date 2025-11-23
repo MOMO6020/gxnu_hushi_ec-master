@@ -28,7 +28,7 @@ DJIMotor::DJIMotor(CAN_HandleTypeDef* _hcan,
                    MotorType          _motor_type,
                    MotorPIDSetting    _setting,
                    MotorPID           _pid_config)
-    : IMotor(_motor_type, _setting, _pid_config), motor_id_(_motor_id)
+    : IMotor(_motor_type, _setting, _pid_config),hcan_(_hcan), motor_id_(_motor_id)
 {
     if (motor_count_ >= MAX_DJIMOTOR_COUNT)         //检查电机数量是否超过最大值
     {

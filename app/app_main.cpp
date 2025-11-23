@@ -140,7 +140,7 @@ void app_main()
     // 核心：初始化三个电机（CAN初始化后创建，避免空指针）
     // 1. GM6020（CAN2，ID=1，限位0~90度）
     gm6020 = std::make_shared<DJIMotor>(
-        &hcan2, 1, MotorType::GM6020,
+        &hcan1, 5, MotorType::GM6020,
         {CloseloopType::ANGLE_LOOP, CloseloopType::SPEED_LOOP, false, FeedbackType::INTERNAL, FeedbackType::INTERNAL},
         {
             .pid_angle_ = {6.0f, 0.2f, 0.3f, 0.0f, 0.0f},  // 位置环PID（Kp=6, Ki=0.2, Kd=0.3）
@@ -178,8 +178,8 @@ void app_main()
 
     taskEXIT_CRITICAL();                  //退出临界值(恢复中断)
     LOGINFO("Robot", "Robot Init");       //记录初始化完成日志
-Serial_Send_Format("所有电机初始化完成！\n");
-Serial_Send_Format("GM6020限位:0~90度 | J4310限位:-45~45度 | J8009限位:-120~120度\n");
+    Serial_Send_Format("所有电机初始化完成！\n");
+    Serial_Send_Format("GM6020限位:0~90度 | J4310限位:-45~45度 | J8009限位:-120~120度\n");
 }
 
 void RobotCMDTask(void* arg __attribute__((unused)))        //机器人控制任务
